@@ -1,0 +1,35 @@
+# Connors 2-RSI swing trading strategy
+strategy:
+  name: connors_rsi_swing
+  type: rsi_meanreversion
+  enabled: true
+
+  universe: nifty100
+  instruments: [equity_cash]
+  horizon: swing
+
+  parameters:
+    rsi_period: 2
+    rsi_entry_threshold: 5
+    rsi_exit_threshold: 65
+    trend_filter_sma: 200
+    max_hold_days: 10
+    catastrophic_stop_pct: 10
+
+  filters:
+    avoid_earnings: true
+    avoid_negative_news_24h: true
+
+  entry:
+    direction: long_only
+    require_above_200_sma: true
+
+  exit:
+    stop_loss: catastrophic_stop_pct
+    target: rsi_exit_threshold
+    time_stop: max_hold_days
+
+  position_sizing:
+    method: equal_weight
+    risk_per_trade_pct: 1.0
+    max_concurrent: 5

@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  ============================================================
+  DeepTrade AI — Theme Variables
+  ============================================================
+  Pure white/black/grey palette only.
+  Theme switches between light and dark mode via .dark class.
+*/
+
+@layer base {
+  :root {
+    /* LIGHT MODE — Pure white base, dark grey foreground */
+    --bg-default: 255 255 255;
+    --bg-subtle: 250 250 250;
+    --bg-muted: 244 244 245;
+    --bg-inverse: 24 24 27;
+
+    --fg-default: 24 24 27;
+    --fg-muted: 82 82 91;
+    --fg-subtle: 113 113 122;
+    --fg-inverse: 250 250 250;
+
+    --border-default: 228 228 231;
+    --border-subtle: 244 244 245;
+    --border-strong: 161 161 170;
+
+    --accent-default: 24 24 27;
+    --accent-fg: 250 250 250;
+
+    /* Subtle grayscale for semantics — distinguished by weight, not hue */
+    --positive: 39 39 42;
+    --negative: 113 113 122;
+    --warning: 161 161 170;
+  }
+
+  .dark {
+    /* DARK MODE — Near-black base, off-white foreground */
+    --bg-default: 9 9 11;
+    --bg-subtle: 24 24 27;
+    --bg-muted: 39 39 42;
+    --bg-inverse: 250 250 250;
+
+    --fg-default: 250 250 250;
+    --fg-muted: 161 161 170;
+    --fg-subtle: 113 113 122;
+    --fg-inverse: 24 24 27;
+
+    --border-default: 39 39 42;
+    --border-subtle: 24 24 27;
+    --border-strong: 82 82 91;
+
+    --accent-default: 250 250 250;
+    --accent-fg: 9 9 11;
+
+    --positive: 244 244 245;
+    --negative: 113 113 122;
+    --warning: 161 161 170;
+  }
+
+  body {
+    @apply bg-bg text-fg font-sans antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  * {
+    @apply border-border;
+  }
+}
+
+@layer components {
+  /* Reusable component classes */
+  .card {
+    @apply rounded-lg border border-border bg-bg-subtle p-4;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fg-muted disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply btn bg-accent text-accent-fg hover:bg-fg-muted;
+  }
+
+  .btn-secondary {
+    @apply btn border border-border bg-bg-subtle text-fg hover:bg-bg-muted;
+  }
+
+  .btn-ghost {
+    @apply btn text-fg-muted hover:bg-bg-muted hover:text-fg;
+  }
+
+  .input {
+    @apply h-9 w-full rounded-md border border-border bg-bg px-3 text-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-fg-muted;
+  }
+
+  .label {
+    @apply text-xs font-medium text-fg-muted uppercase tracking-wide;
+  }
+
+  .table {
+    @apply w-full text-sm;
+  }
+
+  .table th {
+    @apply text-left text-xs font-medium text-fg-muted uppercase tracking-wide pb-3 border-b border-border;
+  }
+
+  .table td {
+    @apply py-3 border-b border-border-subtle;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2 py-0.5 text-xs font-medium rounded;
+  }
+
+  .badge-default {
+    @apply badge bg-bg-muted text-fg-muted;
+  }
+
+  .badge-strong {
+    @apply badge bg-fg text-bg;
+  }
+
+  .badge-outline {
+    @apply badge border border-border text-fg-muted;
+  }
+
+  /* Mono font for numbers */
+  .num {
+    @apply font-mono tabular-nums;
+  }
+
+  /* Status indicators */
+  .status-dot {
+    @apply inline-block w-2 h-2 rounded-full;
+  }
+
+  /* Animations */
+  .pulse-subtle {
+    animation: pulse-subtle 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-subtle {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+}
+
+/* Scrollbar styling — subtle */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(var(--bg-subtle));
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--border-strong));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--fg-muted));
+}

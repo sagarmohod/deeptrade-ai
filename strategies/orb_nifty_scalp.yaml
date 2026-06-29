@@ -1,0 +1,35 @@
+# ORB NIFTY/BANKNIFTY scalping strategy
+strategy:
+  name: orb_nifty_scalp
+  type: opening_range_breakout
+  enabled: true
+
+  universe: [NIFTY, BANKNIFTY, SENSEX]
+  instruments: [equity_options]
+  horizon: scalp
+
+  parameters:
+    range_minutes: 15
+    breakout_buffer_pct: 0.05
+    volume_threshold: 1.5
+    trend_filter_days: 20
+    entry_window_end: "11:30"
+    target_rr_ratio: 1.5
+
+  filters:
+    fake_breakout_filter: true
+
+  entry:
+    direction: bidirectional
+    delta_range: [0.35, 0.55]
+
+  exit:
+    stop_loss: opposite_side_of_range
+    target: range_width * target_rr_ratio
+    time_stop: "14:45 IST"
+    auto_squareoff: "15:15 IST"
+
+  position_sizing:
+    method: atr_based
+    risk_per_trade_pct: 1.0
+    max_capital_per_trade: 5000
